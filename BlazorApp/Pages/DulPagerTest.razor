@@ -1,0 +1,17 @@
+﻿@page "/DulPagerTest"
+@using Dul.Components
+@using Dul.Web
+
+<h3>DulPagerTest</h3>
+
+<hr />
+
+<DulPager Model="pager"></DulPager>
+
+@code {
+    PagerBase pager = new PagerBase() 
+    { 
+        PageNumber = 1, Url = "/DulPagerTest", SearchMode = false, SearchField = "Name", SearchQuery = "홍길동", PageCount = 5, PagerButtonCount = 10,
+        PageSize = 5        
+    };
+}
