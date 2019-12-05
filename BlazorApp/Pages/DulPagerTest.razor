@@ -11,7 +11,14 @@
 @code {
     PagerBase pager = new PagerBase() 
     { 
-        PageNumber = 1, Url = "/DulPagerTest", SearchMode = false, SearchField = "Name", SearchQuery = "홍길동", PageCount = 5, PagerButtonCount = 10,
+        RecordCount = 25,
+        PageNumber = 2, 
+        Url = "/DulPagerTest", 
+        SearchMode = false, 
+        SearchField = "Name", 
+        SearchQuery = "홍길동", 
+        //PageCount = 5, 
+        PagerButtonCount = 5,
         PageSize = 5        
     };
 }

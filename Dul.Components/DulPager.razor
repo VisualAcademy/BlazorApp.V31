@@ -5,7 +5,7 @@
     @if (Model.PageNumber == 1)
     {
         <li class="page-item">
-            <a href="#" class="page-link first disable">처음</a>
+            <a class="page-link first disabled">처음</a>
         </li>
     }
     else
@@ -48,7 +48,6 @@
             <a class="page-link prev">이전</a>
         </li>
     }
-
 
     @{
         int i = 0;
@@ -116,9 +115,8 @@
         </li>
     }
 
-
     @*마지막 링크*@
-    @if (i < Model.PageCount)
+    @if (Model.PageNumber != Model.PageCount)
     {
         if (Model.SearchMode)
         {
@@ -136,7 +134,7 @@
     else
     {
         <li class="page-item">
-            <a href="#" class="page-link last disable">마지막</a>
+            <a class="page-link last disabled">마지막</a>
         </li>
     }
 </ul>
