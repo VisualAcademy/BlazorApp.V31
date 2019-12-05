@@ -1,5 +1,8 @@
 ﻿@using Dul.Web
 
+<input type="button" name="name" value="2번" @onclick="@(() => PagerButtonClicked(2))" />
+<input type="button" name="name" value="3번" @onclick="@(() => PagerButtonClicked(3))" />
+
 <ul class="pagination pagination-sm">
     @*처음 링크*@
     @if (Model.PageNumber == 1)
@@ -14,13 +17,13 @@
         if (Model.SearchMode)
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=1&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link first">처음</a>
+                <a href="@Model.Url/Page/1&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link first">처음</a>
             </li>
         }
         else
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=1" class="page-link first">처음</a>
+                <a href="@Model.Url/Page/1" class="page-link first">처음</a>
             </li>
         }
     }
@@ -32,13 +35,13 @@
         if (Model.SearchMode)
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount)&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link prev">이전</a>
+                <a href="@Model.Url/Page/@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount)&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link prev">이전</a>
             </li>
         }
         else
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount)" class="page-link prev">이전</a>
+                <a href="@Model.Url/Page/@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount)" class="page-link prev">이전</a>
             </li>
         }
     }
@@ -75,7 +78,7 @@
             if (Model.SearchMode)
             {
                 <li class="page-item">
-                    <a href="@Model.Url?Page=@i&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link">
+                    <a href="@Model.Url/Page/@i&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link" @onclick="@(() => PagerButtonClicked(i))">
                         @i
                     </a>
                 </li>
@@ -83,7 +86,7 @@
             else
             {
                 <li class="page-item">
-                    <a href="@Model.Url?Page=@i" class="page-link">
+                    <a href="@Model.Url/Page/@i" class="page-link" @onclick="@(() => PagerButtonClicked(i))">
                         @i
                     </a>
                 </li>
@@ -98,13 +101,13 @@
         if (Model.SearchMode)
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount + (Model.PagerButtonCount + 1))&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link next">다음</a>
+                <a href="@Model.Url/Page/@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount + (Model.PagerButtonCount + 1))&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link next">다음</a>
             </li>
         }
         else
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount + (Model.PagerButtonCount + 1))" class="page-link next">다음</a>
+                <a href="@Model.Url/Page/@(((Model.PageNumber - 1) / (int)Model.PagerButtonCount) * Model.PagerButtonCount + (Model.PagerButtonCount + 1))" class="page-link next">다음</a>
             </li>
         }
     }
@@ -121,13 +124,13 @@
         if (Model.SearchMode)
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=@Model.PageCount&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link first">마지막</a>
+                <a href="@Model.Url/Page/@Model.PageCount&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link first">마지막</a>
             </li>
         }
         else
         {
             <li class="page-item">
-                <a href="@Model.Url?Page=@Model.PageCount" class="page-link first">마지막</a>
+                <a href="@Model.Url/Page/@Model.PageCount" class="page-link first">마지막</a>
             </li>
         }
     }
@@ -147,5 +150,13 @@
     {
         Model.PageCount = Convert.ToInt32(System.Math.Ceiling(Model.RecordCount / (double)Model.PageSize));
         return base.OnParametersSetAsync();
+    }
+
+    [Parameter]
+    public Action<int> PageChanged { get; set; }
+
+    protected void PagerButtonClicked(int page)
+    {
+        PageChanged?.Invoke(page);
     }
 }

@@ -1,12 +1,16 @@
 ﻿@page "/DulPagerTest"
+@page "/DulPagerTest/Page/{Page}"
 @using Dul.Components
 @using Dul.Web
 
+@inject NavigationManager NavigationManager
+
 <h3>DulPagerTest</h3>
 
+페이지: @Page
 <hr />
 
-<DulPager Model="pager"></DulPager>
+<DulPager Model="pager" PageChanged="@PagerPageChanged"></DulPager>
 
 @code {
     PagerBase pager = new PagerBase() 
@@ -21,4 +25,16 @@
         PagerButtonCount = 5,
         PageSize = 5        
     };
+
+    [Parameter]
+    public string Page { get; set; } = "1";
+
+    private string _page = "abcd";
+
+    protected void PagerPageChanged(int page)
+    {
+        _page = page.ToString();
+
+        //NavigationManager.NavigateTo("/DulPagerTest/Page/" + page.ToString());
+    }
 }

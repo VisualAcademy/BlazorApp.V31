@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Dul.Components\Dul.Components.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Demos\ParentChild\" />
+  </ItemGroup>
+
 </Project>
