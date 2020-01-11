@@ -20,12 +20,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorApp.Models\BlazorApp.Models.csproj" />
+    <ProjectReference Include="..\BlazorInputFile\BlazorInputFile.csproj" />
     <ProjectReference Include="..\Dul.Components\Dul.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Pages\Demos\ParentChild\" />
+    <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
 </Project>

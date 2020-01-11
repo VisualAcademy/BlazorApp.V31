@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using BlazorApp.Areas.Identity;
 using BlazorApp.Data;
 using System.Net.Http;
+using BlazorApp.Services;
 
 namespace BlazorApp
 {
@@ -29,11 +30,13 @@ namespace BlazorApp
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor()
+                .AddCircuitOptions(options => { options.DetailedErrors = true; });
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
 
             services.AddScoped<HttpClient>(); // MatBlazor
+            services.AddScoped<IFileUploadService, FileUploadService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
