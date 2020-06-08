@@ -1,0 +1,27 @@
+﻿@*Microsoft.PowerShell.SDK*@
+@*Microsoft.PowerShell.Commands.Diagnostics*@
+@*Microsoft.WSMan.Management*@
+
+@page "/PowerShellRunDemo"
+
+@using System.Management.Automation
+
+<h1>Blazor Server에서 PowerShell 실행 테스트</h1>
+
+@((MarkupString)Message)
+
+@code {
+    public string Message { get; set; }
+    protected override void OnInitialized()
+    {
+        using (PowerShell ps = PowerShell.Create())
+        {
+            var results = ps.AddScript("Get-Command").Invoke();
+
+            foreach (var item in results)
+            {
+                Message += $"{item}<br />";
+            }
+        }
+    }
+}
