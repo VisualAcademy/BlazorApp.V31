@@ -31,6 +31,11 @@
         @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
     </app>
 
+
+    @*CKEditor 5 적용*@
+    <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+    <script src="~/js/CKEditorInterop.js"></script>
+
     <script src="_framework/blazor.server.js"></script>
 </body>
 </html>
