@@ -37,6 +37,12 @@ namespace BlazorApp
 
             services.AddScoped<HttpClient>(); // MatBlazor
             services.AddScoped<IFileUploadService, FileUploadService>();
+
+            // 용량이 큰 파일 업로드 설정
+            services.AddSignalR(e => 
+            {
+                e.MaximumReceiveMessageSize = 102400000;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
